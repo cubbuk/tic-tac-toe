@@ -1,11 +1,11 @@
 class GameHelpers {
 
-  checkCellArray(cellArray) {
+  itemsOfTheArrayAreSame(cellArray) {
     let allSame = true;
     for (let i = 1; allSame && i < cellArray.length; i++) {
       allSame = cellArray[0] && cellArray[i] === cellArray[0];
     }
-    return allSame;
+    return !!allSame;
   }
 
   boardToColArray(board, colIndex) {
@@ -30,20 +30,6 @@ class GameHelpers {
     return isBoardFull;
   }
 
-  computeWinner(newBoard, boardSize) {
-    let winner;
-    const diagonal = this.boardToDiagonalArray(newBoard);
-    winner = this.checkCellArray(diagonal);
-    if (!winner) {
-      for (let i = 0; !winner && i < boardSize; i++) {
-        const row = newBoard[i];
-        const col = this.boardToColArray(newBoard, i);
-        winner = this.checkCellArray(row) || this.checkCellArray(col);
-      }
-    }
-    return winner;
-  }
-
   createWinnerCell(rowIndex, colIndex) {
     return {rowIndex, colIndex};
   }
@@ -63,16 +49,16 @@ class GameHelpers {
   computeWinnerCells(newBoard, boardSize) {
     let winnerCells = [];
     const diagonal = this.boardToDiagonalArray(newBoard);
-    if (this.checkCellArray(diagonal)) {
+    if (this.itemsOfTheArrayAreSame(diagonal)) {
       winnerCells = this.createWinnerCellsFromDiagonal(newBoard);
     } else {
       for (let i = 0; winnerCells.length === 0 && i < boardSize; i++) {
         const row = newBoard[i];
         const col = this.boardToColArray(newBoard, i);
-        if (this.checkCellArray(row)) {
+        if (this.itemsOfTheArrayAreSame(row)) {
           winnerCells = this.createWinnerCellsFromRow(row, i);
         }
-        else if (this.checkCellArray(col)) {
+        else if (this.itemsOfTheArrayAreSame(col)) {
           winnerCells = this.createWinnerCellsFromCol(col, i);
         }
       }

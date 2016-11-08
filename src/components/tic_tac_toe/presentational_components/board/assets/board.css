@@ -18,3 +18,7 @@
     padding: 5%;
     border: solid gainsboro 1px;
 }
+
+.winner-cell{
+    background-color: aquamarine;
+}

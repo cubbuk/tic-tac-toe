@@ -12,5 +12,6 @@ export const boardSize = BOARD_SIZE;
 export default {
   board,
   currentPlayer: "O",
-  theWinner: ""
+  theWinner: "",
+  winnerCells: []
 };

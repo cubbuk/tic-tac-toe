@@ -21,12 +21,13 @@ const newFamilyTreeReducer = (state = initialState, action) => {
           return boardRow;
         }
       });
+      const winnerCells = gameHelpers.computeWinnerCells(newBoard, boardSize);
       return {
         ...state,
         currentPlayer: action.currentPlayer === "O" ? "X" : "O",
         board: newBoard,
         winnerCells: gameHelpers.computeWinnerCells(newBoard, boardSize),
-        theWinner: gameHelpers.computeWinner(newBoard, boardSize)
+        theWinner: winnerCells.length > 0 ? action.currentPlayer : ""
       };
     }
     default:

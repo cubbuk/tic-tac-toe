@@ -20,9 +20,19 @@ class GameHelpers {
     });
   }
 
+  isBoardFull(board){
+    let isBoardFull = true;
+    board.map(boardRow => {
+      boardRow.map(boardCell => {
+        isBoardFull = isBoardFull && !!boardCell;
+      });
+    });
+    return isBoardFull;
+  }
+
   computeWinner(newBoard, boardSize) {
     let winner;
-    const diagonal = this.boardToDiagonalArray(newBoard)
+    const diagonal = this.boardToDiagonalArray(newBoard);
     winner = this.checkCellArray(diagonal);
     if (!winner) {
       for (let i = 0; !winner && i < boardSize; i++) {

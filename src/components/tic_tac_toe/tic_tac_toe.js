@@ -4,6 +4,7 @@ import {Button, Col, Label, Row} from "react-bootstrap";
 import Board from "./presentational_components/board/board";
 import * as gameActions from "../../actions/game_actions";
 import * as selectors from "../../selectors/selectors";
+import "./assets/tic_tac_toe.css";
 
 @connect((state) => {
   return {
@@ -50,14 +51,17 @@ class TicTacToe extends React.Component {
 
   render() {
     let {board, currentPlayer, theWinner, isBoardFull} = this.props;
-    const gameIsFinished = theWinner || isBoardFull;
+    const gameOver = theWinner || isBoardFull;
     return (
-      <Row>
-        <Col xs={12} className="center">
-          {this.renderWinnerOrDraw(theWinner, isBoardFull)}
+      <Row style={{margin: "0px 20px"}}>
+        <Col xs="12" className="game-status">
+          <h3><Label bsStyle="default">Current Player:&nbsp;{currentPlayer}</Label></h3>
+          {theWinner && <h3><Label bsStyle="success">The Winner:&nbsp;{theWinner}</Label></h3>}
+          {!theWinner && gameOver && <h3><Label bsStyle="default">DRAW</Label></h3>}
+          {gameOver && <h3 className="pointer" onClick={this.startNewGame.bind(this)}><Label bsStyle="primary">Start New Game</Label></h3>}
         </Col>
         <Col xs={12}>
-          <Board board={board} currentPlayer={currentPlayer} onPlay={this.onPlay.bind(this)} disabled={!!gameIsFinished}/>
+          <Board board={board} currentPlayer={currentPlayer} onPlay={this.onPlay.bind(this)} gameOver={!!gameOver}/>
         </Col>
       </Row>
     );

@@ -8,16 +8,18 @@ class Board extends React.Component {
   }
 
   onPlay(rowIndex, colIndex, cellValue) {
-    if (!cellValue && !this.props.disabled) {
+    if (!cellValue && !this.props.gameOver) {
       this.props.onPlay(rowIndex, colIndex);
     }
   }
 
   renderBoardCell(rowIndex, boardCell, colIndex) {
-    let {disabled} = this.props;
+    let {gameOver} = this.props;
     let classNames = ["board-cell"];
-    if(!(boardCell || disabled)){
+    if (!(boardCell || gameOver)) {
       classNames.push("pointer");
+    } else if (gameOver) {
+      classNames.push("board-cell-game-over");
     }
     return <Col className={classNames.join(" ")}
                 onClick={this.onPlay.bind(this, rowIndex, colIndex, boardCell)}
@@ -31,22 +33,11 @@ class Board extends React.Component {
   }
 
   render() {
-    let {board, currentPlayer, disabled} = this.props;
-    let classes = ["board"];
-    if (disabled) {
-      classes.push("disabled-board");
-    }
+    let {board, currentPlayer} = this.props;
     return (
-      <Row className={classes.join(" ")} style={{opacity: disabled ? 0.8 : 1}}>
-        <Col xs={12}>
-          <h4>
-            <Label className="margin-left-20" bsStyle="primary">Current Player:&nbsp;{currentPlayer}</Label>
-          </h4>
-        </Col>
         <Col xs={12}>
           {board.map(this.renderBoardRow.bind(this))}
         </Col>
-      </Row>
     );
   }
 }
@@ -54,7 +45,7 @@ class Board extends React.Component {
 Board.propTypes = {
   board: PropTypes.array.isRequired,
   onPlay: PropTypes.func.isRequired,
-  disabled: PropTypes.bool,
+  gameOver: PropTypes.bool,
   currentPlayer: PropTypes.string.isRequired
 };
 

@@ -2,19 +2,19 @@
     border: solid aliceblue 1px;
 }
 
-.disabled-board {
+.board-cell-game-over {
     opacity: 0.8;
     background-color: blanchedalmond;
 }
 
 .board-row {
-    margin: 0px 20px;
 }
 
 .board-cell {
+    font-size: xx-large;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 60px;
+    padding: 5%;
     border: solid gainsboro 1px;
 }

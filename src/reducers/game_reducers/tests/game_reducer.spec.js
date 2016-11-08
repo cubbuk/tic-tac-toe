@@ -3,12 +3,13 @@ import gameHelper from "../game_helper";
 import gameReducer from "../game_reducer";
 import * as gameReducerSelector from "../game_reducer_selector";
 import * as gameActions from "../../../actions/game_actions";
-import intialState from "../game_reducer_initial_state";
+import initialState from "../game_reducer_initial_state";
 import {O, X} from "../game_constants";
 
 describe("game reducer", () => {
-  it("not existing state", (done) => {
-    expect(gameReducer(undefined, {type: "not existing action"})).to.eql(intialState);
+
+  it("not existing action", (done) => {
+    expect(gameReducer(undefined, {type: "not existing action"})).to.eql(initialState);
     done();
   });
 
@@ -22,6 +23,15 @@ describe("game reducer", () => {
     const newState = gameReducer(localState, gameActions.play(0, 0));
     expect(gameReducerSelector.getCurrentPlayer(newState)).to.equal(O);
     expect(gameReducerSelector.getBoard(newState)[0][0]).to.equal(X);
+    done();
+  });
+
+  it("play after new game should initialize state", (done) => {
+    const localState = gameReducer(undefined, gameActions.play(0, 0));
+    expect(gameReducerSelector.getCurrentPlayer(localState)).to.equal(X);
+
+    const newState = gameReducer(localState, gameActions.startNewGame());
+    expect(newState).to.eql(initialState);
     done();
   });
 

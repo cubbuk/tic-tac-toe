@@ -6,7 +6,11 @@ for (let i = 0; i < BOARD_SIZE; i++) {
     board[i][j] = "";
   }
 }
+
+export const boardSize = BOARD_SIZE;
+
 export default {
   board,
-  currentPlayer: "0"
-}
+  currentPlayer: "O",
+  theWinner: ""
+};

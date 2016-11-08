@@ -1,0 +1,18 @@
+.margin-left-20 {
+    margin-left: 20px;
+}
+
+.margin-top-20 {
+    margin-top: 20px;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.pointer {
+    cursor: pointer;
+}

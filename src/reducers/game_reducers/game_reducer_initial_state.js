@@ -1,4 +1,4 @@
-const BOARD_SIZE = 3;
+import {O, BOARD_SIZE} from "./game_constants";
 const board = [BOARD_SIZE];
 for (let i = 0; i < BOARD_SIZE; i++) {
   board[i] = [];
@@ -7,11 +7,9 @@ for (let i = 0; i < BOARD_SIZE; i++) {
   }
 }
 
-export const boardSize = BOARD_SIZE;
-
 export default {
   board,
-  currentPlayer: "O",
+  currentPlayer: O,
   theWinner: "",
   winnerCells: []
 };

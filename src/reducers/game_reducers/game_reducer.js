@@ -1,6 +1,7 @@
 import * as gameActionTypes from "../../action_types/game_action_types";
-import initialState, {boardSize} from "./game_reducer_initial_state";
+import initialState from "./game_reducer_initial_state";
 import gameHelpers from "./game_helper";
+import {X, O, BOARD_SIZE} from "./game_constants";
 
 const newFamilyTreeReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -8,11 +9,12 @@ const newFamilyTreeReducer = (state = initialState, action) => {
       return {...initialState};
     }
     case gameActionTypes.PLAY: {
+      let {currentPlayer} = state;
       const newBoard = state.board.map((boardRow, rowIndex) => {
         if (rowIndex === action.rowIndex) {
           return boardRow.map((boardColumn, colIndex) => {
             if (colIndex === action.colIndex) {
-              return action.currentPlayer;
+              return currentPlayer;
             } else {
               return boardColumn;
             }
@@ -21,13 +23,13 @@ const newFamilyTreeReducer = (state = initialState, action) => {
           return boardRow;
         }
       });
-      const winnerCells = gameHelpers.computeWinnerCells(newBoard, boardSize);
+      const winnerCells = gameHelpers.computeWinnerCells(newBoard, BOARD_SIZE);
       return {
         ...state,
-        currentPlayer: action.currentPlayer === "O" ? "X" : "O",
+        currentPlayer: currentPlayer === O ? X : O,
         board: newBoard,
-        winnerCells: gameHelpers.computeWinnerCells(newBoard, boardSize),
-        theWinner: winnerCells.length > 0 ? action.currentPlayer : ""
+        winnerCells: winnerCells,
+        theWinner: winnerCells.length > 0 ? currentPlayer : ""
       };
     }
     default:

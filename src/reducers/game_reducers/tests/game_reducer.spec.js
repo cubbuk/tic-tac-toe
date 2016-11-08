@@ -83,7 +83,7 @@ describe("game reducer", () => {
     localState = gameReducer(localState, gameActions.play(2, 2)); // XOO
     expect(gameReducerSelector.getTheWinner(localState)).to.be.empty;
     expect(gameReducerSelector.getWinnerCells(localState)).to.be.empty;
-    expect(gameReducerSelector.getIsBoardFull(localState)).to.true
+    expect(gameReducerSelector.getIsBoardFull(localState)).to.true;
     done();
   });
 

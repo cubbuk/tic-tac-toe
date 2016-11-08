@@ -1,5 +1,5 @@
 import React, {PropTypes} from "react";
-import {Col, Label, Row} from "react-bootstrap";
+import {Col, Row} from "react-bootstrap";
 import "./assets/board.css";
 import gameHelper from "../../../../reducers/game_reducers/game_helper";
 
@@ -25,11 +25,13 @@ class Board extends React.Component {
     } else if (gameOver) {
       classNames.push("board-cell-game-over");
     }
-    return <Col className={classNames.join(" ")}
-                onClick={this.onPlay.bind(this, rowIndex, colIndex, boardCell)}
-                xs={4}
-                key={colIndex}>{boardCell || <span>&nbsp;</span>}
-    </Col>;
+    return (
+      <Col className={classNames.join(" ")}
+           onClick={this.onPlay.bind(this, rowIndex, colIndex, boardCell)}
+           xs={4}
+           key={colIndex}>{boardCell || <span>&nbsp;</span>}
+      </Col>
+    );
   }
 
   renderBoardRow(boardRow, rowIndex) {

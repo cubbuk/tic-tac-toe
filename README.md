@@ -1,8 +1,11 @@
-# Forked from React Slingshot! https://github.com/coryhouse/react-slingshot
+### Forked from React Slingshot! https://github.com/coryhouse/react-slingshot
 
-# To run
-# npm install
-# npm run start
+#### For Running
 
-# To test
-# npm run test
+  `npm install`
+  
+  `npm run start`
+
+#### For testing
+
+  `npm run test`

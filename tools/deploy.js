@@ -3,7 +3,7 @@ const exec = require('child_process').exec;
 var absolutePath = path.resolve(__dirname, "../");
 const allCommands = [];
 allCommands.push("cd " + absolutePath);
-allCommands.push("tar -czvP dist | ssh  20satir.com 'mkdir dist ; cp -R dist/ dist_$(date +%Y%m%d_%H%M%S) && tar -xzvP -C dist --strip-components=1'");
+allCommands.push("tar -czvP dist | ssh  20satir.com 'mkdir dist ; mkdir old_dists; cp -R dist/ old_dists/dist_$(date +%Y%m%d_%H%M%S) && tar -xzvP -C dist --strip-components=1'");
 exec(allCommands.join(" && "),
   (error, stdout, stderr) => {
     console.log(`stdout: ${stdout}`);

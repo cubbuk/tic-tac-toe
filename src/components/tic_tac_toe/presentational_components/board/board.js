@@ -25,11 +25,13 @@ class Board extends React.Component {
     } else if (gameOver) {
       classNames.push("board-cell-game-over");
     }
-    return <Col className={classNames.join(" ")}
-                onClick={this.onPlay.bind(this, rowIndex, colIndex, boardCell)}
-                xs={4}
-                key={colIndex}>{boardCell || <span>&nbsp;</span>}
-    </Col>;
+    return (
+      <Col className={classNames.join(" ")}
+           onClick={this.onPlay.bind(this, rowIndex, colIndex, boardCell)}
+           xs={4}
+           key={colIndex}>{boardCell || <span>&nbsp;</span>}
+      </Col>
+    );
   }
 
   renderBoardRow(boardRow, rowIndex) {
